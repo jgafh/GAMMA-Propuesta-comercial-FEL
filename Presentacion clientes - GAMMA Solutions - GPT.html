@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Comercial - Gamma Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background-color: #030E21; /* Dark Background */
+            color: #FFFFFF;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Colors Variables */
+        :root {
+            --bg-color: #030E21;
+            --primary-color: #0052FF;
+            --accent-color: #00C2FF;
+            --text-secondary: #A1A9B4;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Typography */
+        h1, h2, h3, .heading-style {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p, li, .text-style {
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+        .text-white { color: #FFFFFF; }
+        .text-accent { color: var(--accent-color); }
+        .text-primary { color: var(--primary-color); }
+
+        /* Glassmorphism Utility */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        /* Slide Structure for Screen Viewing */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px; /* 16:9 Aspect Ratio */
+            background-color: var(--bg-color);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            page-break-after: always; /* Essential for printing */
+        }
+
+        /* Decorative Isotype (Standard small) */
+        .deco-iso {
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 300px;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* --- Specific Slide Styles --- */
+
+        /* Slide 1: Portada */
+        #slide-1 {
+            align-items: flex-start;
+            text-align: left;
+            background: radial-gradient(circle at 20% 40%, rgba(0, 82, 255, 0.15) 0%, var(--bg-color) 70%);
+        }
+        .main-logo { max-width: 350px; margin-bottom: 60px; }
+        #slide-1 h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            color: #FFFFFF;
+        }
+        #slide-1 .claim {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        .ghost-iso-large {
+            position: absolute;
+            bottom: -20%;
+            right: -15%;
+            width: 800px;
+            opacity: 0.03;
+            z-index: 0;
+            pointer-events: none;
+            transform: rotate(-15deg);
+        }
+
+        /* Standard Headers */
+        h2 { font-size: 3rem; margin-bottom: 40px; color: #FFFFFF; }
+        .accent-header { color: var(--accent-color); }
+
+        /* General List Styles */
+        .bullet-list { list-style: none; gap: 20px; display: flex; flex-direction: column; }
+        .bullet-list li {
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+        }
+        .bullet-list li::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            margin-right: 15px;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        .list-final-text { font-size: 1.8rem; margin-top: 40px; font-weight: 700; color: var(--accent-color); }
+
+        /* Highlight Box Utility */
+        .highlight-box { border-left: 4px solid var(--accent-color); padding-left: 30px; }
+
+        /* Pricing Slides Styles */
+        .pricing-slide h2 { font-size: 2.5rem; margin-bottom: 10px; color: var(--accent-color); }
+        .pricing-slide .price { font-size: 4rem; font-weight: 700; color: #FFFFFF; margin: 20px 0; }
+        .pricing-slide .price span { font-size: 1.5rem; font-weight: 400; color: var(--text-secondary); }
+        .pricing-slide .description { font-size: 1.4rem; margin-bottom: 30px; max-width: 700px; color: #FFFFFF;}
+        .pricing-features { list-style: none; display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .pricing-features li { font-size: 1.3rem; padding: 12px; background: rgba(0, 194, 255, 0.05); border-radius: 8px; color: #FFFFFF; display: flex; align-items: center; }
+        .pricing-features li::before { content: '✓'; color: var(--accent-color); margin-right: 10px; font-weight: 700; }
+        .pricing-note { font-size: 1rem; color: var(--text-secondary); margin-top: 25px; font-style: italic; text-align: center; display: block;}
+        .popular-badge {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* SLIDE 10: COMPARATIVE TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 1.2rem;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            vertical-align: middle;
+        }
+        .comparison-table thead th {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.4rem;
+            padding-bottom: 20px;
+        }
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: #FFFFFF;
+            width: 35%;
+        }
+        .check-mark { color: var(--accent-color); font-size: 1.4rem;}
+        .cross-mark { color: #444; font-size: 1.2rem; opacity: 0.5; }
+        .table-note-footer { text-align: center; font-size: 1.5rem; margin-top: 30px; color: #FFFFFF; font-weight: 600;}
+
+
+        /* Slide 11: Crece a tu ritmo */
+        #slide-11 h2 { font-size: 3.5rem; margin-bottom: 60px; text-align: center; }
+        .growth-flow { display: flex; justify-content: space-between; align-items: center; padding: 0 50px; gap: 30px; }
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 200px;
+        }
+        .flow-step.highlighted {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 30px rgba(0, 194, 255, 0.15);
+        }
+        .flow-step h3 { font-size: 2rem; color: #FFFFFF; margin-bottom: 10px; }
+        .flow-arrow { font-size: 3rem; color: var(--accent-color); }
+
+        /* Slide 13: Diferenciadores Grid (UPDATED ICONS) */
+        .grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
+        .grid-item { display: flex; align-items: center; font-size: 1.6rem; font-weight: 600; color: #FFFFFF; }
+        .grid-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            border-radius: 12px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--accent-color);
+            flex-shrink: 0;
+        }
+        /* SVG Styling inside icons - Keeping them white for contrast against the glowing blue box */
+        .grid-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: none;
+            stroke: #FFFFFF;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Slide 14: Cierre */
+        #slide-14 {
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at 80% 30%, rgba(0, 82, 255, 0.15) 0%, var(--bg-color) 70%);
+        }
+        #slide-14 h2 { font-size: 3.5rem; margin-bottom: 30px; }
+        #slide-14 p.outro-text { font-size: 2rem; margin-bottom: 50px; color: var(--accent-color); }
+        .cta-box {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: 0 10px 30px -10px var(--primary-color);
+            margin-bottom: 60px;
+        }
+        .contact-footer {
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+        .contact-icon-svg {
+            margin-right: 12px;
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent-color);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+
+        /* PRINT MEDIA QUERY - CRITICAL */
+        @media print {
+            body {
+                padding: 0;
+                background-color: var(--bg-color);
+                display: block;
+            }
+            @page {
+                size: landscape; /* A4 Horizontal */
+                margin: 0;
+            }
+            .slide {
+                width: 100% !important;
+                height: 100vh !important;
+                margin: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                padding: 40px 60px !important;
+                background-color: var(--bg-color) !important;
+            }
+            /* Ensure background colors and gradients print */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            #slide-1 { background: radial-gradient(circle at 20% 40%, rgba(0, 82, 255, 0.15) 0%, var(--bg-color) 70%) !important; }
+            #slide-14 { background: radial-gradient(circle at 80% 30%, rgba(0, 82, 255, 0.15) 0%, var(--bg-color) 70%) !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="slide" id="slide-1">
+        <img src="GAMMA isotipo.png" alt="" class="ghost-iso-large">
+        <div class="slide-content" style="align-items: flex-start;">
+            <img src="GAMMA Solutions - Fondo transparente.png" alt="GAMMA Solutions Logo" class="main-logo">
+            <h1>Facturación Electrónica<br>Inteligente para tu Negocio</h1>
+            <p class="claim">Cumple con Hacienda. Gana control. Crece sin fricción.</p>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-2">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <h2 class="accent-header">El Problema Real</h2>
+            <p style="font-size: 1.8rem; margin-bottom: 30px; color: #FFFFFF;">En El Salvador, la facturación electrónica es un requisito obligatorio.</p>
+            <p style="font-size: 1.4rem;">Muchos negocios cumplen, pero siguen perdiendo tiempo, cometiendo errores y operando sin control real.</p>
+            <p class="highlight-box text-white" style="margin-top: 30px; font-size: 1.6rem;">El problema no es emitir una factura. <br> <span class="text-accent">El problema es todo lo que pasa alrededor.</span></p>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-3">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <h2>Lo que pasa hoy en muchos negocios</h2>
+            <ul class="bullet-list">
+                <li>Sistemas desconectados</li>
+                <li>Procesos manuales</li>
+                <li>Errores frecuentes</li>
+                <li>Poca visibilidad de ventas</li>
+                <li>Estrés al cierre de mes</li>
+            </ul>
+            <p class="list-final-text">Esto frena el crecimiento y genera riesgos innecesarios.</p>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-4">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <h2>Nuestra Propuesta</h2>
+            <div class="glass">
+                <p class="text-white" style="font-size: 1.8rem; margin-bottom: 30px;">GAMMA Solutions no solo te ayuda a cumplir.</p>
+                <p class="highlight-box text-white" style="font-size: 2rem; border-color: var(--primary-color);">Te ayuda a ordenar tu operación, tener visibilidad y tomar mejores decisiones, desde el primer día.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-5">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <h2>¿Para quién es Gamma?</h2>
+            <div style="display: flex; gap: 40px;">
+                <div class="glass" style="flex: 1;">
+                    <ul class="bullet-list">
+                        <li>Emprendedores y PYMES</li>
+                        <li>Negocios de servicios</li>
+                        <li>Comercios y retail</li>
+                        <li>Clínicas, salones, restaurantes</li>
+                        <li>Empresas en crecimiento</li>
+                    </ul>
+                </div>
+                <div style="flex: 1; display: flex; align-items: center;">
+                    <p class="list-final-text" style="font-size: 2.5rem; margin-top: 0;">Si tu negocio factura y quiere orden, GAMMA Solutions es para ti.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-6">
+	    <img src="GAMMA isotipo.png" alt="" class="ghost-iso-large">
+        <div class="slide-content" style="align-items: center; text-align: center;">
+            <h2 style="font-size: 4rem;">Nuestros Planes</h2>
+            <p style="font-size: 2rem; color: var(--accent-color);">Elige el plan que se adapta a tu etapa actual.</p>
+            <p style="margin-top: 20px; font-weight: 700; color: #FFFFFF; font-size: 1.8rem;">Cuando tu negocio crece, tu sistema también.</p>
+        </div>
+    </section>
+
+    <section class="slide pricing-slide" id="slide-7">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <div class="glass">
+                <h2>Starter – Cumple Fácil</h2>
+                <p class="price">$5 <span>al mes</span></p>
+                <p class="description">Facturación electrónica para cumplir con Hacienda sin complicaciones.</p>
+                <p style="margin-bottom: 20px; font-weight: 700; color: #FFFFFF;">Incluye:</p>
+                <ul class="pricing-features">
+                    <li>API que se integra con tu sistema</li>
+                    <li>Límite mensual de documentos</li>
+                    <li>Cumplimiento legal ante Hacienda</li>
+                    <li>Emisión de documentos por correo personalizado</li>
+                </ul>
+                <span class="pricing-note">Ideal para negocios con sistema de venta para integrarse directamente con nuestros endpoints</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide pricing-slide" id="slide-8">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <div class="glass" style="border: 2px solid var(--accent-color); box-shadow: 0 0 30px rgba(0, 194, 255, 0.2);">
+                <span class="popular-badge">PLAN MÁS ELEGIDO</span>
+                <h2>Smart – Controla tu Negocio</h2>
+                <p class="price">$12 <span>al mes</span></p>
+                <p class="description">Facturación electrónica con visibilidad real de ventas y control fiscal.</p>
+                <p style="margin-bottom: 20px; font-weight: 700; color: #FFFFFF;">Incluye:</p>
+                <ul class="pricing-features" style="grid-template-columns: 1fr 1fr;">
+                    <li>Facturación electrónica</li>
+                    <li>Registro de ventas</li>
+                    <li>Dashboard de ventas</li>
+                    <li>Emisión de documentos por correo personalizado</li>
+                </ul>
+                <span class="pricing-note">El equilibrio perfecto entre precio y control. Acceso a nuestra plataforma.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide pricing-slide" id="slide-9">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <div class="glass">
+                <h2>Pro – Opera y Escala</h2>
+                <p class="price">$30 <span>al mes</span></p>
+                <p class="description">Un solo sistema para facturar, registrar ventas y controlar inventario.</p>
+                <p style="margin-bottom: 20px; font-weight: 700; color: #FFFFFF;">Incluye:</p>
+                <ul class="pricing-features" style="grid-template-columns: 1fr 1fr;">
+                    <li>Facturación electrónica</li>
+                    <li>Registro de ventas</li>
+					<li>Control de inventario</li>
+                    <li>Control de comisiones</li>
+                    <li>Alto volumen de facturación</li>
+					<li>Manejo de empleados y control de clientes</li>
+                </ul>
+                 <span class="pricing-note">Pensado para negocios en crecimiento y operación diaria.</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-10">
+        <div class="slide-content">
+            <h2 style="text-align: center; margin-bottom: 20px;">Comparativa de Planes</h2>
+            <div class="glass" style="padding: 10px 30px;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Funcionalidad</th>
+                            <th>Starter ($5)</th>
+                            <th>Smart ($12)</th>
+                            <th>Pro ($30)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Facturación electrónica</td>
+                            <td><span class="check-mark">✔️</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                        </tr>
+                        <tr>
+                            <td>Registro de ventas</td>
+                            <td><span class="cross-mark">❌</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                        </tr>
+                        <tr>
+                            <td>Dashboard de ventas</td>
+                            <td><span class="cross-mark">❌</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                        </tr>
+                        <tr>
+                            <td>Envío por Correo electrónico</td>
+                            <td><span class="cross-mark">✔️</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                        </tr>
+                        <tr>
+                            <td>Control de inventario</td>
+                            <td><span class="cross-mark">❌</span></td>
+                            <td><span class="cross-mark">❌</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                        </tr>
+                        <tr>
+                            <td>Manejo de empleados y control de clientes</td>
+                            <td><span class="cross-mark">❌</span></td>
+                            <td><span class="cross-mark">❌</span></td>
+                            <td><span class="check-mark">✔️</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="table-note-footer">Empieza con el plan que necesitas hoy. Escala cuando tu negocio crezca.</p>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-11">
+        <div class="slide-content">
+            <h2>Crece a tu ritmo</h2>
+            <div class="growth-flow">
+                <div class="glass flow-step">
+                    <h3>Empieza simple.</h3>
+                    <p style="font-size: 1.2rem;">(Plan Starter)</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="glass flow-step highlighted">
+                    <h3>Gana control.</h3>
+                    <p style="font-size: 1.2rem;">(Plan Smart)</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="glass flow-step">
+                    <h3>Escala cuando lo necesites.</h3>
+                    <p style="font-size: 1.2rem;">(Plan Pro)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-12">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <h2 class="accent-header">¿Por qué Gamma?</h2>
+            <div class="glass">
+                <ul class="bullet-list" style="display: grid; grid-template-columns: 1fr 1fr;">
+                    <li>Fácil de usar</li>
+                    <li>Pensado para dueños de negocio</li>
+                    <li>Automatiza procesos clave</li>
+                    <li>Reduce errores</li>
+                    <li>Ahorra tiempo</li>
+                </ul>
+            </div>
+            <p class="list-final-text" style="text-align: center; font-size: 2.2rem;">Menos estrés. Más control. Mejor decisión.</p>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-13">
+        <img src="GAMMA isotipo.png" alt="" class="deco-iso">
+        <div class="slide-content">
+            <h2>Diferenciadores Clave</h2>
+            <div class="grid-2x2">
+                <div class="glass grid-item">
+                    <div class="grid-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M2 12h.01"/><path d="M2 17h.01"/><path d="M2 7h.01"/><path d="M6 7h12"/><path d="M6 12h12"/><path d="M6 17h12"/></svg>
+                    </div>
+                    Onboarding simple y rápido
+                </div>
+                <div class="glass grid-item">
+                    <div class="grid-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M17 8h-6"/><path d="M14 12H8"/></svg>
+                    </div>
+                    Soporte cercano
+                </div>
+                <div class="glass grid-item">
+                    <div class="grid-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l6-6"/><path d="M9 9h.01"/><path d="M15 15h.01"/></svg>
+                    </div>
+                    Intuitivo y fácil de usar
+                </div>
+                <div class="glass grid-item">
+                    <div class="grid-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 17h20"/><path d="M2 12h20"/><path d="M2 7h20"/><path d="M12 2l3 3-3 3"/><path d="M12 17V2"/></svg>
+                    </div>
+                    Crece sin cambiar de sistema
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide" id="slide-14">
+        <div class="slide-content">
+            <img src="GAMMA Solutions - Fondo transparente.png" alt="GAMMA Solutions Logo" class="main-logo" style="max-width: 300px; margin-bottom: 40px;">
+            <h2>Empieza hoy con Gamma Solutions</h2>
+            <p class="outro-text">Cumple con la facturación electrónica <br> y toma el control de tu negocio.</p>
+            <div class="cta-box">
+                Contáctanos y recibe asesoría
+            </div>
+
+            <div class="contact-footer">
+                <div class="contact-item">
+                    <svg class="contact-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    +503 72076611
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                    info@gammasolutions.dev
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                    @gammasolutions.dev
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
